@@ -9,11 +9,13 @@ import csv
 
 
 video=cv2.VideoCapture(0)
-facedetect=cv2.CascadeClassifier('D:/Users/Aarad/PycharmProjects/FaceCheck/haarcascade_frontalface_default.xml')
+facedetect=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-with open('D:/Users/Aarad/PycharmProjects/FaceCheck/names.pkl', 'rb') as w:
+# Localize directory names if needed.
+
+with open('names.pkl', 'rb') as w:
     LABELS=pickle.load(w)
-with open('D:/Users/Aarad/PycharmProjects/FaceCheck/faces_data.pkl', 'rb') as f:
+with open('faces_data.pkl', 'rb') as f:
     FACES=pickle.load(f)
 
 #print('Shape of Faces matrix --> ', FACES.shape)
@@ -29,7 +31,7 @@ attendance_taken = ""
 ts=time.time()
 date=datetime.fromtimestamp(ts).strftime("%d-%m-%Y")
 timestamp=datetime.fromtimestamp(ts).strftime("%H:%M:%S")
-exist=os.path.isfile("D:/Users/Aarad/PycharmProjects/FaceCheck/rollcall_" + date + ".csv")
+exist=os.path.isfile("rollcall_" + date + ".csv")
 
 while True:
     ret,frame=video.read()
@@ -42,7 +44,7 @@ while True:
         ts=time.time()
         date=datetime.fromtimestamp(ts).strftime("%d-%m-%Y")
         timestamp=datetime.fromtimestamp(ts).strftime("%H:%M:%S")
-        exist=os.path.isfile("D:/Users/Aarad/PycharmProjects/FaceCheck/rollcall_" + date + ".csv")
+        exist=os.path.isfile("rollcall_" + date + ".csv")
         cv2.rectangle(frame, (x,y), (x+w, y+h), (0,0,255), 1)
         cv2.rectangle(frame,(x,y),(x+w,y+h),(50,50,255),2)
         cv2.rectangle(frame,(x,y-40),(x+w,y),(50,50,255),-1)
@@ -61,13 +63,13 @@ while True:
     k=cv2.waitKey(1)
     if k == ord('h'):
         if exist:
-            with open("D:/Users/Aarad/PycharmProjects/FaceCheck/rollcall_" + date + ".csv", "+a")as csvfile:
+            with open("rollcall_" + date + ".csv", "+a")as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(attendance)
                 print(output)
             csvfile.close()
         else:
-            with open("D:/Users/Aarad/PycharmProjects/FaceCheck/rollcall_" + date + ".csv", "+a")as csvfile:
+            with open("rollcall_" + date + ".csv", "+a")as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(COL_NAMES)
                 writer.writerow(attendance)
