@@ -33,24 +33,25 @@ cv2.destroyAllWindows()
 faces_data=np.asarray(faces_data)
 faces_data=faces_data.reshape(100, -1)
 
+# Localize directory locations if needed.
 
-if 'names.pkl' not in os.listdir('D:/Users/Aarad/PycharmProjects/FaceCheck'):
+if 'names.pkl' not in os.listdir('facial-recognition-attendance'):
     names=[name]*100
-    with open('D:/Users/Aarad/PycharmProjects/FaceCheck/names.pkl', 'wb') as f:
+    with open('names.pkl', 'wb') as f:
         pickle.dump(names, f)
 else:
-    with open('D:/Users/Aarad/PycharmProjects/FaceCheck/names.pkl', 'rb') as f:
+    with open('names.pkl', 'rb') as f:
         names=pickle.load(f)
     names=names+[name]*100
-    with open('D:/Users/Aarad/PycharmProjects/FaceCheck/names.pkl', 'wb') as f:
+    with open('names.pkl', 'wb') as f:
         pickle.dump(names, f)
 
-if 'faces_data.pkl' not in os.listdir('D:/Users/Aarad/PycharmProjects/FaceCheck/'):
-    with open('D:/Users/Aarad/PycharmProjects/FaceCheck/faces_data.pkl', 'wb') as f:
+if 'faces_data.pkl' not in os.listdir('facial-recognition-attendance'):
+    with open('faces_data.pkl', 'wb') as f:
         pickle.dump(faces_data, f)
 else:
-    with open('D:/Users/Aarad/PycharmProjects/FaceCheck/faces_data.pkl', 'rb') as f:
+    with open('faces_data.pkl', 'rb') as f:
         faces=pickle.load(f)
     faces=np.append(faces, faces_data, axis=0)
-    with open('D:/Users/Aarad/PycharmProjects/FaceCheck/faces_data.pkl', 'wb') as f:
+    with open('faces_data.pkl', 'wb') as f:
         pickle.dump(faces, f)
