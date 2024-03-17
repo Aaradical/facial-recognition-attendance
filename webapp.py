@@ -22,7 +22,8 @@ if count == 0:
 else:
     st.write(f"Count: {count}")
 
+# Localize directory names if needed.
 
-df=pd.read_csv("D:/Users/Aarad/PycharmProjects/FaceCheck/rollcall_" + date + ".csv")
+df=pd.read_csv("rollcall_" + date + ".csv")
 
 st.dataframe(df.style.highlight_max(axis=0))
